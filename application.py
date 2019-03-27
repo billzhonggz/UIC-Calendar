@@ -10,5 +10,11 @@ def index():
     dt = datetime.datetime.now()
     # Assign the variables, convert to string.
     date = dt.strftime("%Y-%m-%d")
+    # Set up events list.
+    events = [
+        'Mid-term exams',
+        'Staff annual party',
+        'Added from Python code'
+    ]
     # Render the template with arguments.
-    return render_template('index.html', date=date)
+    return render_template('index.html', date=date, events=events)

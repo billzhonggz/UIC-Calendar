@@ -28,8 +28,9 @@
                     <div class="card-header bg-primary text-white">{{ date }}</div>
                     <div class="card-body">
                         <ol>
-                            <li>Mid-term Exam</li>
-                            <li>Staff annual party</li>
+                            {% for event in events %}
+                            <li>{{ event }}</li>
+                            {% endfor %}
                         </ol>
                     </div>
                 </div>
