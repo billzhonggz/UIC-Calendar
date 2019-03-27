@@ -1,6 +1,6 @@
 import datetime
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -19,7 +19,10 @@ def index():
     # Render the template with arguments.
     return render_template('index.html', date=date, events=events)
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    message = 'Test message'
-    return render_template('login.html', message=message)
+    if request.method == 'POST':
+        pass
+    else:
+        message = 'Test message'
+        return render_template('login.html', message=message)
