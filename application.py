@@ -18,3 +18,7 @@ def index():
     ]
     # Render the template with arguments.
     return render_template('index.html', date=date, events=events)
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
