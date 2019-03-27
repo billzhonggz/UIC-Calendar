@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<head>
+    <title>UIC Calendar</title>
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 30px;
+        }
+
+        .row {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>UIC Calendar</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card border-primary">
+                    <div class="card-header bg-primary text-white">{{ date }}</div>
+                    <div class="card-body">
+                        <ol>
+                            <li>Mid-term Exam</li>
+                            <li>Staff annual party</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card border-secondary">
+                    <div class="card-header bg-secondary text-white">Options</div>
+                    <div class="card-body">
+                        <button type="button" class="btn btn-link">Query events by date</button>
+                        <button type="button" class="btn btn-link">Manage this site</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
