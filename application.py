@@ -15,14 +15,13 @@ def index():
     dt = datetime.datetime.now()
     # Assign the variables, convert to string.
     date = dt.strftime("%Y-%m-%d")
-    # Set up events list.
-    events = [
-        'Mid-term exams',
-        'Staff annual party',
-        'Added from Python code'
-    ]
-    # Render the template with arguments.
-    return render_template('index.html', date=date, events=events)
+    db_op = DatabaseOperations()
+    result = db_op.query_events_by_date(date)
+    if result is None or len(result) is 0:
+        result = ['No event']
+    else:
+        pass
+    return render_template('index.html', date=date, events=result)
 
 
 @app.route('/login', methods=['GET', 'POST'])
