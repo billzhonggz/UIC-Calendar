@@ -4,7 +4,7 @@ import pymysql
 
 from flask import Flask, render_template, request
 
-from wtforms import Form, StringField, PasswordField, validators
+from wtforms import Form, StringField, PasswordField, DateField, validators
 
 app = Flask(__name__)
 
@@ -39,10 +39,18 @@ def login():
         message = 'Test username: admin, password: admin'
         return render_template('login.html', message=message)
 
+
 @app.route('/query', methods=['GET', 'POST'])
 def query():
-    if request.method == 'POST':
-        pass
+    form = QueryDateForm(request.form)
+    if request.method == 'POST' and form.validate():
+        db_op = DatabaseOperations()
+        result = db_op.query_events_by_date(form.date.data)
+        if result is None or len(result) is 0:
+            result = ['No event']
+        else:
+            pass
+        return render_template('query.html', date=form.date.data, events=result)
     else:
         return render_template('query.html', date='Input a date on the right', events=['Input a date on the right'])
 
@@ -52,10 +60,15 @@ class LoginForm(Form):
     password = PasswordField('Password', [validators.DataRequired()])
 
 
+class QueryDateForm(Form):
+    date = DateField('date')
+
+
 class DatabaseOperations():
     __db_url = '172.16.199.106'
     __db_username = 'billjrzhong'
     __db_password = 'taizuatUIC2018'
+    __db_name = 'billjrzhong'
     __db = ''
 
     def __init__(self):
@@ -67,20 +80,20 @@ class DatabaseOperations():
         self.__db.close()
 
     def db_connect(self):
-        self.__db = pymysql.connect(self.__db_url, self.__db_username, self.__db_password)
+        self.__db = pymysql.connect(self.__db_url, self.__db_username, self.__db_password, self.__db_name)
         return self.__db
 
     def query_events_by_date(self, date):
         """Transfer Python datetime object to string, then do query."""
         cursor = self.__db.cursor()
-        date_str = date.strftime('%Y-%m-%d')
         try:
-            cursor.execute(
-                'SELECT * FROM `events` WHERE `events.event_id` = (SELECT `event_id` FROM `dates` INNER JOIN `dates_events` WHERE `dates.date` = %s)',
-                date_str)
-            results = cursor.fetchall()
+            sql = 'SELECT event FROM `events` WHERE `event_id` = ' \
+                  '(SELECT `event_id` FROM `dates` INNER JOIN `dates_events` ON dates.date_id = dates_events.date_id ' \
+                  'WHERE `date` = str_to_date("{0}","%Y-%m-%d"))'.format(str(date))
+            cursor.execute(sql)
+            results = cursor.fetchall()[0]
             return results
-        except:
+        except Exception as e:
             return None
 
     def add_events_by_date(self, date, events):
