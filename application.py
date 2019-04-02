@@ -54,6 +54,11 @@ def query():
         return render_template('query.html', date='Input a date on the right', events=['Input a date on the right'])
 
 
+@app.route('/manage', methods=['GET', 'POST'])
+def manage():
+    return render_template('manage.html')
+
+
 class LoginForm(Form):
     username = StringField('Username', [validators.Length(min=4, max=25)])
     password = PasswordField('Password', [validators.DataRequired()])
