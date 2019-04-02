@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Query - UIC Calendar</title>
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 30px;
+        }
+
+        .row {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>UIC Calendar</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card border-primary">
+                <div class="card-header bg-primary text-white">{{ date }}</div>
+                <div class="card-body">
+                    <ol>
+                        {% for event in events %}
+                            <li>{{ event }}</li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-secondary">
+                <div class="card-header bg-secondary text-white">Options</div>
+                <div class="card-body">
+                    <form accept-charset="UTF-8" role="form" action="#" method="post">
+                        <fieldset>
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon"></span>
+                                    <input type="date" placeholder="Date" name="date" class="form-control">
+                                </div>
+                            </div>
+                            <input class="btn btn-outline-primary btn-block" type="submit" value="Submit to Query">
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

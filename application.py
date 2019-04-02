@@ -39,6 +39,13 @@ def login():
         message = 'Test username: admin, password: admin'
         return render_template('login.html', message=message)
 
+@app.route('/query', methods=['GET', 'POST'])
+def query():
+    if request.method == 'POST':
+        pass
+    else:
+        return render_template('query.html', date='Input a date on the right', events=['Input a date on the right'])
+
 
 class LoginForm(Form):
     username = StringField('Username', [validators.Length(min=4, max=25)])
