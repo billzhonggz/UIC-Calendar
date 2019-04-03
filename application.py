@@ -54,9 +54,9 @@ def query():
         return render_template('query.html', date='Input a date on the right', events=['Input a date on the right'])
 
 
-@app.route('/manage', methods=['GET', 'POST'])
+@app.route('/admin', methods=['GET', 'POST'])
 def manage():
-    return render_template('manage.html')
+    return render_template('admin.html')
 
 
 class LoginForm(Form):
