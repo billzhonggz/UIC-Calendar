@@ -16,43 +16,50 @@
 </head>
 
 <body>
-    <div class="row justify-content-md-center">
-        <div class="col-md-4">
-            <div class="card bg-primary text-white">
-                <div class="card-header">
-                    <h5 class="card-title">Login - UIC Calendar</h5>
-                </div>
-                <div class="card-body">
-                    <form accept-charset="UTF-8" role="form" action="#" method="post">
-                        <fieldset>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"></span>
-                                    <input type="text" placeholder="Username" name="username" class="form-control">
-                                </div>
+<div class="row justify-content-md-center">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-header">
+                <h5 class="card-title">Login - UIC Calendar</h5>
+            </div>
+            <div class="card-body">
+                <form accept-charset="UTF-8" role="form" action="#" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                <input type="text" placeholder="Username" name="username" class="form-control">
                             </div>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon"></span>
-                                    <input type="password" placeholder="Password" name="password" class="form-control"
-                                        value="">
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"></span>
+                                <input type="password" placeholder="Password" name="password" class="form-control"
+                                       value="">
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <!-- Message shows here -->
-                                    <strong>{{ message }}</strong>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- Message shows here -->
+                                <strong>{{ message }}</strong>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <input class="btn btn-lg btn-dark btn-block" type="submit" value="Login">
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <input class="btn btn-lg btn-dark btn-block" type="submit" value="Login">
                             </div>
-                        </fieldset>
-                    </form>
+                        </div>
+                    </fieldset>
+                </form>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="../">
+                            <button class="btn btn-lg btn-light btn-block">Back</button>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </body>

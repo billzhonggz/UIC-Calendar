@@ -2,11 +2,33 @@ import datetime
 
 import pymysql
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
+from flask_login import LoginManager, login_required, UserMixin, login_user, logout_user
 
 from wtforms import Form, StringField, PasswordField, DateField, validators
 
 app = Flask(__name__)
+app.secret_key = b'UIC-Calendar-20190408'
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+class CalendarAdmin(UserMixin):
+    """User class for flask-login"""
+
+    def __init__(self, id):
+        self.id = id
+        self.name = 'admin'
+        self.password = 'admin'
+        # self.is_authenticated = True
+        # self.is_active = True
+        # self.is_anonymous = False
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return CalendarAdmin(user_id)
 
 
 @app.route('/')
@@ -29,14 +51,22 @@ def login():
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
         if form.username.data == 'admin' and form.password.data == 'admin':
-            message = 'Login succeed, taking you to the admin page.'
-            return render_template('login.html', message=message)
+            test_admin_user = CalendarAdmin('admin')
+            login_user(test_admin_user)
+            return redirect('./admin')
         else:
             message = 'Login failed.'
             return render_template('login.html', message=message)
     else:
         message = 'Test username: admin, password: admin'
         return render_template('login.html', message=message)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('.')
 
 
 @app.route('/query', methods=['GET', 'POST'])
@@ -55,7 +85,8 @@ def query():
 
 
 @app.route('/admin', methods=['GET', 'POST'])
-def manage():
+@login_required
+def admin():
     return render_template('admin.html')
 
 
