@@ -1,3 +1,15 @@
+"""Program logic for UIC Calender
+
+Answer to Ch.17 Flask, Software Development Workshop II,
+BNU-HKBU United International College.
+
+Answer written by Junru ZHONG
+
+© 2019-current, authors at Computer Science and Technology,
+Division of Science and Technology,
+BNU-HKBU United International College
+"""
+
 import datetime
 
 import pymysql
@@ -21,9 +33,6 @@ class CalendarAdmin(UserMixin):
         self.id = id
         self.name = 'admin'
         self.password = 'admin'
-        # self.is_authenticated = True
-        # self.is_active = True
-        # self.is_anonymous = False
 
 
 @login_manager.user_loader
@@ -100,10 +109,10 @@ class QueryDateForm(Form):
 
 
 class DatabaseOperations():
-    __db_url = '172.16.199.106'
-    __db_username = 'billjrzhong'
-    __db_password = 'taizuatUIC2018'
-    __db_name = 'billjrzhong'
+    __db_url = ''
+    __db_username = ''
+    __db_password = ''
+    __db_name = ''
     __db = ''
 
     def __init__(self):
@@ -115,7 +124,8 @@ class DatabaseOperations():
         self.__db.close()
 
     def db_connect(self):
-        self.__db = pymysql.connect(self.__db_url, self.__db_username, self.__db_password, self.__db_name)
+        self.__db = pymysql.connect(
+            self.__db_url, self.__db_username, self.__db_password, self.__db_name)
         return self.__db
 
     def query_events_by_date(self, date):
@@ -124,15 +134,10 @@ class DatabaseOperations():
         try:
             sql = 'SELECT event FROM `events` WHERE `event_id` = ' \
                   '(SELECT `event_id` FROM `dates` INNER JOIN `dates_events` ON dates.date_id = dates_events.date_id ' \
-                  'WHERE `date` = str_to_date("{0}","%Y-%m-%d"))'.format(str(date))
+                  'WHERE `date` = str_to_date("{0}","%Y-%m-%d"))'.format(
+                      str(date))
             cursor.execute(sql)
             results = cursor.fetchall()[0]
             return results
         except Exception as e:
             return None
-
-    def add_events_by_date(self, date, events):
-        pass
-
-    def delete_events_by_date(self, date, event_id):
-        pass
