@@ -1,6 +1,8 @@
 # UIC-Calendar
 A simple demo Flask project for Software Development Workshop II, BNU-HKBU United International College.
 
+The course taught JSP and C# before, and change to Python since spring 2018.
+
 ## Features
 
 - Get current date from the server computer.
@@ -17,3 +19,11 @@ A simple demo Flask project for Software Development Workshop II, BNU-HKBU Unite
   - flask_login
   - wtforms
 - Set environment variables and run Flask development server (more detail at [here](http://flask.pocoo.org/)).
+
+## License
+
+MIT
+
+This work was done when I having my position at Division of Science and Technology, BNU-HKBU United International College. The division shares the copyright of this work.
+
+This work will be taken down if requested by the college.
